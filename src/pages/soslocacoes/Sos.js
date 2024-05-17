@@ -7,7 +7,6 @@ export default function Sos() {
     <Container>
         <h1>CONTRATO SOS</h1><br />
         <span>Digite os dados abaixo para gerar o contrato simples.</span>
-        {/* <img src={bg} alt="Papel de parede" /> */}
 
         <br /><br />
         <form>
@@ -71,6 +70,7 @@ const ButtonEmpresa = styled.div`
 `;
 const Container = styled.div`
     width: 100vw;
+    height: 100vh;
     padding-top: 50px;
 
    /* background: linear-gradient(45deg, h.sl(239.06, 78.05%, 67.84%), hsl(235, 47.37%, 70.2%)); */
