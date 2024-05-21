@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import bg from "/home/servidor/www/fusion-contratos/src/utils/images/bg.jpeg";
+import sosLogo from "/home/servidor/www/fusion-contratos/src/utils/images/sos.png";
 
 export default function Sos() {
+    const [ nome, setNome ] = useState();
+    const [ endereco, setEndereco ] = useState();
+    const [ cep, setCep ] = useState();
+    const [ cidade, setCidade ] = useState();
+    const [ telefone, setTelefone ] = useState();
+    const [ cnpj, setCnpj ] = useState();
+    const [ email, setEmail ] = useState();
+
+
   return (
     <Container>
-        <h1>CONTRATO SOS</h1><br />
-        <span>Digite os dados abaixo para gerar o contrato simples.</span>
+        <img src={sosLogo} alt="Logo SOS Locacoes" />
+        <h3>Configure as regras do contrato</h3><br />
+        <span>Digite os dados abaixo para gerar o contrato.</span>
 
         <br /><br />
         <form>
@@ -70,8 +80,7 @@ const ButtonEmpresa = styled.div`
 `;
 const Container = styled.div`
     width: 100vw;
-    height: 100vh;
-    padding-top: 50px;
+    height: 100%;
 
    /* background: linear-gradient(45deg, h.sl(239.06, 78.05%, 67.84%), hsl(235, 47.37%, 70.2%)); */
    
@@ -82,7 +91,12 @@ const Container = styled.div`
 
 
     
-
+    img{
+        margin-top: 20px;
+        width: 250px;
+        height: 150px;
+        object-fit: contain;
+    }
     font-family: 'Inter';
     tt{
         font-family: 'Inter';
@@ -100,6 +114,11 @@ const Container = styled.div`
     span{
         font-weight: 300;
         font-size: 1rem;
+    }
+    h3{
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 1.2px;
     }
     
     form{
@@ -124,6 +143,10 @@ const Container = styled.div`
             border-radius: 10px;
             text-transform: uppercase;
             font-weight: 800;
+
+            &:hover{
+                cursor: not-allowed;
+            }
         }
         span{
             font-weight: 600;
