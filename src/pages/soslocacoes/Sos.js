@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import sosLogo from "../../utils/images/sos.png";
+import { useNavigate } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Sos() {
+  const navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [endereco, setEndereco] = useState("");
   const [cep, setCep] = useState("");
@@ -24,23 +29,53 @@ export default function Sos() {
         email !== ""
       ) {
         setControlButton(true);
-        console.log("O controle do botao ficou: ", controlButton);
       }
     } catch (error) {
       console.log(error);
     }
   }, [nome, endereco, cep, cidade, telefone, cnpj, email, controlButton]);
 
+  function GravandoDados(e) {
+    e.preventDefault();
+
+    const DadosdoContrato = {
+      nome: nome,
+      endereco: endereco,
+      cep: cep,
+      cidade: cidade,
+      telefone: telefone,
+      cnpj: cnpj,
+      email: email,
+    };
+
+    toast.info("Gravando os dados no sistema, um segundo.", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    setTimeout(() => {
+      navigate("/config-contrato");
+    }, 2000);
+
+    localStorage.setItem("@dados-contrato", JSON.stringify(DadosdoContrato));
+  }
   return (
     <Container>
       <img src={sosLogo} alt="Logo SOS Locacoes" />
       <h3>Configure as regras do contrato</h3>
       <br />
       <span>Digite os dados abaixo para gerar o contrato.</span>
+      <br />
+      <br />
+      <ToastContainer />
 
-      <br />
-      <br />
-      <form>
+      <form onSubmit={(e) => GravandoDados(e)}>
         <label>Nome/Razao Social:</label>
         <input
           type="text"
@@ -177,7 +212,6 @@ const Container = styled.div`
       margin-bottom: 5px;
     }
     button {
-      text-decoration: dashed;
       font-size: 1rem;
       width: 84%;
       height: 50px;
