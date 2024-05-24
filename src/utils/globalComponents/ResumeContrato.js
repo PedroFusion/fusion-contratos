@@ -51,9 +51,12 @@ export default function ResumeContrato() {
             </label>
           </Endereco>
           <br />
-
           <label>
             <strong>Telefone:</strong> {data.telefone}
+          </label>
+          <br />
+          <label>
+            <strong>Contato:</strong> {data.contato}
           </label>
           <br />
           <label>
@@ -101,6 +104,7 @@ const Endereco = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   position: relative;

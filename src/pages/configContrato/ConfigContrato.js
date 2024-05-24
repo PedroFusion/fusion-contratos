@@ -1,14 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import sosLogo from "../../utils/images/sos.png";
 import ResumeContrato from "../../utils/globalComponents/ResumeContrato.js";
+import MaquinaDados from "../../utils/globalComponents/MaquinaDados.js";
+import List from "../../utils/globalComponents/ListCreator.js";
 
 export default function ConfigContrato() {
   const [qtdMaquinas, setQtdMaquinas] = useState(0);
   const [valorContrato, setValorContrato] = useState(0);
   const [dia, setDia] = useState(0);
   const [prazoContrato, setPrazoContrato] = useState(0);
+  const [control, setControl] = useState(false);
+  let [listaMaquinas, setListaMaquinas] = useState([]);
 
+  var Lista = [];
+  
+  useEffect(() => {
+    if(qtdMaquinas !== 0) {
+      for (let i = 0; i < qtdMaquinas; i++) {
+        Lista.push(i);
+      }
+      setListaMaquinas(Lista);
+
+    }
+  }, [qtdMaquinas]);
+
+  function goToModelAndSerial (e){
+    e.preventDefault();
+        
+    setControl(true);
+    console.log(listaMaquinas)
+
+  }
   return (
     <Container>
       <img src={sosLogo} alt="Logo SOS Locacoes" />
@@ -17,12 +40,15 @@ export default function ConfigContrato() {
       <br />
       <br />
       <ResumeContrato />
-      <form>
+
+      {!control ?  
+      <form onSubmit={(e) => goToModelAndSerial(e)}>
         <label>QUAL A QUANTIDADE DE MÁQUINAS?</label>
         <input
           type="number"
           placeholder="EX.: 1"
-          minLength={1}
+          min={1}
+          autoFocus
           onChange={(e) => setQtdMaquinas(e.target.value)}
           required
         ></input>
@@ -30,6 +56,7 @@ export default function ConfigContrato() {
         <input
           type="number"
           placeholder="R$ 1200"
+          min={50}
           onChange={(e) => setValorContrato(e.target.value)}
           required
         ></input>
@@ -37,25 +64,70 @@ export default function ConfigContrato() {
         <input
           type="number"
           placeholder="10"
+          max={31}
           onChange={(e) => setDia(e.target.value)}
           required
         ></input>
         <label>QUAL O PRAZO DO CONTRATO? (EM MESES)</label>
         <input
           type="number"
+          min={6}
           placeholder="EX.: 12"
           onChange={(e) => setPrazoContrato(e.target.value)}
           required
         ></input>
         <button>PRÓXIMA</button>
-      </form>
+      </form> 
+      : 
+      
+      
+      listaMaquinas.length > 0 ? 
+      <ListMaquinasDiv>
+          {listaMaquinas.map((item, index ) => <MaquinaDados key={index} maqNumber={index} />) }
+      </ListMaquinasDiv>
+          :
+          <span>Ops! parece que aconteceu algum problema técnico, acionar o T.I. (Pedro Henrique)</span>
+        
+      }
+
+      <BtnGo>PROXIMO</BtnGo>
     </Container>
   );
 }
+const BtnGo = styled.button`
+margin-top: 20px;
+margin-bottom: 20px;
 
+
+      font-size: 1.2rem;
+      letter-spacing: 1.3px;
+      width: 84%;
+      height: 50px;
+      max-width: 642px;
+      border: none;
+      border-radius: 10px;
+      text-transform: uppercase;
+      font-weight: 900 !important;
+      color: lightgreen;
+      background-color: rgba(0, 0, 0, 1);
+
+      &:hover {
+        cursor: pointer;
+      }
+    
+`
+const ListMaquinasDiv = styled.div`
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+
+flex-wrap: wrap;
+
+`
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

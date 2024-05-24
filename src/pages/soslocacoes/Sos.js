@@ -14,6 +14,7 @@ export default function Sos() {
   const [cidade, setCidade] = useState("");
   const [telefone, setTelefone] = useState("");
   const [cnpj, setCnpj] = useState("");
+  const [contato, setContato] = useState("");
   const [email, setEmail] = useState("");
   const [controlButton, setControlButton] = useState(false);
 
@@ -26,7 +27,8 @@ export default function Sos() {
         cidade !== "" &&
         telefone !== "" &&
         cnpj !== "" &&
-        email !== ""
+        email !== "" &&
+        contato !== ""
       ) {
         setControlButton(true);
       }
@@ -46,6 +48,7 @@ export default function Sos() {
       telefone: telefone,
       cnpj: cnpj,
       email: email,
+      contato: contato
     };
 
     toast.info("Gravando os dados no sistema, um segundo.", {
@@ -110,6 +113,12 @@ export default function Sos() {
           required
           placeholder="(99) 99999-9999"
           onChange={(e) => setTelefone(e.target.value)}
+        ></input><label>Nome do Contato:</label>
+        <input
+          type="text"
+          required
+          placeholder="Ex.: ANDRÉ VIDAL"
+          onChange={(e) => setContato(e.target.value)}
         ></input>
         <label>CNPJ / CPF:</label>
         <input
