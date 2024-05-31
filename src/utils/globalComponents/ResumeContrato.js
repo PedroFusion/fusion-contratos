@@ -23,7 +23,10 @@ export default function ResumeContrato() {
   return (
     <Container>
       {data === null ? (
-        <h3>Aguarde, estou obtendo as informações do contrato.</h3>
+        <>
+          <h3>Aguarde, estou obtendo as informações do contrato...</h3><br />
+          <label><strong onClick={() => {navigate("/") }}>Clique aqui</strong> para atualizar os dados do contrato</label>
+        </>
       ) : (
         <>
           <IconChange onClick={() => changeData()}>
@@ -128,5 +131,9 @@ const Container = styled.div`
 
   strong {
     font-weight: 800;
+
+    &:hover{
+      cursor:  pointer;
+    }
   }
 `;

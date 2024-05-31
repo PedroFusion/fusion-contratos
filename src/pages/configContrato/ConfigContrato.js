@@ -11,8 +11,9 @@ export default function ConfigContrato() {
   const [dia, setDia] = useState(0);
   const [prazoContrato, setPrazoContrato] = useState(0);
   const [control, setControl] = useState(false);
+  let [maquinasDoContrato, setMaquinasDosContrato] = useState([]);
   let [listaMaquinas, setListaMaquinas] = useState([]);
-
+  
   var Lista = [];
   
   useEffect(() => {
@@ -23,13 +24,16 @@ export default function ConfigContrato() {
       setListaMaquinas(Lista);
 
     }
-  }, [qtdMaquinas]);
+
+    if((maquinasDoContrato.length === listaMaquinas.length) && (listaMaquinas.length !== 0) && (maquinasDoContrato.length !== 0)) { 
+      console.log("Agora sim, todos os serials estao digitados, seguir para a proxima etapa.");
+    }
+  }, [qtdMaquinas, maquinasDoContrato]);
 
   function goToModelAndSerial (e){
     e.preventDefault();
         
     setControl(true);
-    console.log(listaMaquinas)
 
   }
   return (
@@ -83,14 +87,13 @@ export default function ConfigContrato() {
       
       listaMaquinas.length > 0 ? 
       <ListMaquinasDiv>
-          {listaMaquinas.map((item, index ) => <MaquinaDados key={index} maqNumber={index} />) }
+          {listaMaquinas.map((item, index ) => <MaquinaDados key={index} maqNumber={index} setMaquinasDosContrato={setMaquinasDosContrato} maquinasDoContrato={maquinasDoContrato}/>) }
       </ListMaquinasDiv>
           :
           <span>Ops! parece que aconteceu algum problema técnico, acionar o T.I. (Pedro Henrique)</span>
         
       }
 
-      <BtnGo>PROXIMO</BtnGo>
     </Container>
   );
 }
