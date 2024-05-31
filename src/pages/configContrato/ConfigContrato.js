@@ -3,9 +3,14 @@ import styled from "styled-components";
 import sosLogo from "../../utils/images/sos.png";
 import ResumeContrato from "../../utils/globalComponents/ResumeContrato.js";
 import MaquinaDados from "../../utils/globalComponents/MaquinaDados.js";
-import List from "../../utils/globalComponents/ListCreator.js";
+
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ConfigContrato() {
+  const navigate = useNavigate();
   const [qtdMaquinas, setQtdMaquinas] = useState(0);
   const [valorContrato, setValorContrato] = useState(0);
   const [dia, setDia] = useState(0);
@@ -13,6 +18,7 @@ export default function ConfigContrato() {
   const [control, setControl] = useState(false);
   let [maquinasDoContrato, setMaquinasDosContrato] = useState([]);
   let [listaMaquinas, setListaMaquinas] = useState([]);
+  const [mostraBotaoDepoisDeObterNumeroDeSerie, setMostraBotaoDepoisDeObterNumeroDeSerie] = useState(false);
   
   var Lista = [];
   
@@ -25,16 +31,52 @@ export default function ConfigContrato() {
 
     }
 
-    if((maquinasDoContrato.length === listaMaquinas.length) && (listaMaquinas.length !== 0) && (maquinasDoContrato.length !== 0)) { 
-      console.log("Agora sim, todos os serials estao digitados, seguir para a proxima etapa.");
+    if(listaMaquinas.length !== 0 && maquinasDoContrato.length !== 0 && listaMaquinas.length === maquinasDoContrato.length ) { 
+     atualizaControleDoBotao();
     }
-  }, [qtdMaquinas, maquinasDoContrato]);
+  }, [qtdMaquinas, maquinasDoContrato, listaMaquinas]);
+
+  function atualizaControleDoBotao(){
+    if(mostraBotaoDepoisDeObterNumeroDeSerie === false) {
+      setMostraBotaoDepoisDeObterNumeroDeSerie(true);
+     
+    } else {
+      window.scrollTo({ top: 2500, behavior: "smooth" })
+    };
+  }
 
   function goToModelAndSerial (e){
     e.preventDefault();
-        
+    
     setControl(true);
 
+  }
+
+
+  function salvarSerialeContradorLocalStorage(){
+    toast.info("Gravando os dados no sistema, um segundo.", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    setTimeout(() => {
+      navigate("/last-review");
+    }, 2000);
+
+    localStorage.setItem("@maquinas", JSON.stringify(maquinasDoContrato));
+    localStorage.setItem("@vencimento", JSON.stringify({
+        valorContrato: valorContrato,
+        dataVencimento: dia,
+        prazoContrato: prazoContrato,
+        qtdMaquinas: maquinasDoContrato.length
+
+    }));
   }
   return (
     <Container>
@@ -44,12 +86,13 @@ export default function ConfigContrato() {
       <br />
       <br />
       <ResumeContrato />
-
+      <ToastContainer />
       {!control ?  
       <form onSubmit={(e) => goToModelAndSerial(e)}>
         <label>QUAL A QUANTIDADE DE MÁQUINAS?</label>
         <input
           type="number"
+          onBlur={() => window.scrollTo({ top: 1000, behavior: "smooth" })}
           placeholder="EX.: 1"
           min={1}
           autoFocus
@@ -58,6 +101,7 @@ export default function ConfigContrato() {
         ></input>
         <label>QUAL O VALOR GLOBAL DO CONTRATO?</label>
         <input
+        onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
           type="number"
           placeholder="R$ 1200"
           min={50}
@@ -67,6 +111,7 @@ export default function ConfigContrato() {
         <label>QUAL O DIA DO VENCIMENTO? (DIGITE APENAS O DIA)</label>
         <input
           type="number"
+          onBlur={() => window.scrollTo({ top: 2000, behavior: "smooth" })}
           placeholder="10"
           max={31}
           onChange={(e) => setDia(e.target.value)}
@@ -74,6 +119,7 @@ export default function ConfigContrato() {
         ></input>
         <label>QUAL O PRAZO DO CONTRATO? (EM MESES)</label>
         <input
+          onBlur={() => window.scrollTo({ top: 2500, behavior: "smooth" })}
           type="number"
           min={6}
           placeholder="EX.: 12"
@@ -84,11 +130,14 @@ export default function ConfigContrato() {
       </form> 
       : 
       
-      
+        
       listaMaquinas.length > 0 ? 
-      <ListMaquinasDiv>
-          {listaMaquinas.map((item, index ) => <MaquinaDados key={index} maqNumber={index} setMaquinasDosContrato={setMaquinasDosContrato} maquinasDoContrato={maquinasDoContrato}/>) }
-      </ListMaquinasDiv>
+      <>
+        <ListMaquinasDiv onLoad={() => {window.scrollTo({ top: 2500, behavior: "smooth" })}}>
+            {listaMaquinas.map((item, index ) => <MaquinaDados key={index} maqNumber={index} setMaquinasDosContrato={setMaquinasDosContrato} maquinasDoContrato={maquinasDoContrato}/>) }
+        </ListMaquinasDiv>
+        {mostraBotaoDepoisDeObterNumeroDeSerie ? <BtnGo onClick={() => salvarSerialeContradorLocalStorage()}>PROXIMO</BtnGo> : <></>}
+      </>
           :
           <span>Ops! parece que aconteceu algum problema técnico, acionar o T.I. (Pedro Henrique)</span>
         
@@ -116,6 +165,23 @@ margin-bottom: 20px;
 
       &:hover {
         cursor: pointer;
+      }
+
+      animation: btnAnimation 1s ease-in-out infinite;
+
+      @keyframes btnAnimation{
+        0% {
+          transform: scale(1);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+        } 50% {
+          transform: scale(1.1);
+          box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+        } 100% {
+          transform: scale(1);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+
+        }
       }
     
 `
@@ -164,7 +230,21 @@ const Container = styled.div`
     text-transform: uppercase;
     font-weight: 900;
     letter-spacing: 1.2px;
-  }
+  }   
+  .button-go {
+      font-size: 1rem;
+      width: 84%;
+      height: 50px;
+      max-width: 642px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      font-weight: 800;
+      background-color: rgba(255, 0, 0, 00.3);
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
 
   form {
     display: flex;

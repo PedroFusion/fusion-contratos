@@ -3,6 +3,7 @@ import Homepage from "./homepage/Homepage.js";
 import Sos from "./soslocacoes/Sos.js";
 import Fusion from "./fusion/Fusion.js";
 import ConfigContrato from "./configContrato/ConfigContrato.js";
+import LastReview from "./lastReviewContract/LastReview.js";
 
 export default function App() {
   return (
@@ -12,6 +13,8 @@ export default function App() {
         <Route path="/sos" element={<Sos />} />
         <Route path="/fusion" element={<Fusion />} />
         <Route path="/config-contrato" element={<ConfigContrato />} />
+        <Route path="/last-review" element={<LastReview />} />
+
       </Routes>
     </BrowserRouter>
   );

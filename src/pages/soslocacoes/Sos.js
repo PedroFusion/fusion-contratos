@@ -52,7 +52,7 @@ export default function Sos() {
     };
 
     toast.info("Gravando os dados no sistema, um segundo.", {
-      position: "bottom-right",
+      position: "bottom-center",
       autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,

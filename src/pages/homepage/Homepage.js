@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import sosLogo from "../../utils/images/sos.png";
+import fusionLogo from "../../utils/images/fusion.png";
 
 
 export default function Homepage() {
@@ -11,9 +12,8 @@ export default function Homepage() {
         <h1>Fusion Contratos</h1><br />
         <span>Seja bem vindo a plataforma, selecione qual empresa deseja montar o contrato:</span>    
         <ContainerButtons>
-            <ButtonEmpresa onClick={() => navigate("/fusion")}>Fusion Copiadoras</ButtonEmpresa>
-
             <ButtonEmpresa onClick={() => navigate("/sos")}><img src={sosLogo} alt="Logo SOS Locacoes" /></ButtonEmpresa>
+            <ButtonEmpresa onClick={() => navigate("/fusion")}><img src={fusionLogo} alt="Logo Fusion Copiadoras" /></ButtonEmpresa>
         </ContainerButtons>
         <tt>PLATAFORMA DESENVOLVIDA POR: PEDRO HENRIQUE</tt>
     </Container>

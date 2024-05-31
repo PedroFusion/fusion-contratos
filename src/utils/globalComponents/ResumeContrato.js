@@ -22,56 +22,56 @@ export default function ResumeContrato() {
 
   return (
     <Container>
-      {data === null ? (
-        <>
-          <h3>Aguarde, estou obtendo as informações do contrato...</h3><br />
-          <label><strong onClick={() => {navigate("/") }}>Clique aqui</strong> para atualizar os dados do contrato</label>
-        </>
-      ) : (
-        <>
-          <IconChange onClick={() => changeData()}>
-            <FaUserEdit />
-            {/* <h3>ALTERAR DADOS</h3> */}
-          </IconChange>
+    {data === null ? (
+      <>
+        <h3>Aguarde, estou obtendo as informações do contrato...</h3><br />
+        <label><strong onClick={() => {navigate("/") }}>Clique aqui</strong> para atualizar os dados do contrato</label>
+      </>
+    ) : (
+      <>
+        <IconChange onClick={() => changeData()}>
+          <FaUserEdit />
+          {/* <h3>ALTERAR DADOS</h3> */}
+        </IconChange>
 
-          <h3>Resumo do contrato</h3>
-          <br />
+        <h3>CABEÇALHO DO CONTRATO</h3>
+        <br />
+        <label>
+          <strong>Nome/Razão Social:</strong> {data.nome}
+        </label>
+        <br />
+        <Endereco>
           <label>
-            <strong>Nome/Razão Social:</strong> {data.nome}
-          </label>
-          <br />
-          <Endereco>
-            <label>
-              <strong>Endereço:</strong> {data.endereco}
-            </label>
-            <br />
-            <label>
-              <strong>CEP:</strong> {data.cep}
-            </label>
-            <br />
-            <label>
-              <strong>Cidade:</strong> {data.cidade}
-            </label>
-          </Endereco>
-          <br />
-          <label>
-            <strong>Telefone:</strong> {data.telefone}
+            <strong>Endereço:</strong> {data.endereco}
           </label>
           <br />
           <label>
-            <strong>Contato:</strong> {data.contato}
+            <strong>CEP:</strong> {data.cep}
           </label>
           <br />
           <label>
-            <strong>Email:</strong> {data.email}
+            <strong>Cidade:</strong> {data.cidade}
           </label>
-          <br />
-          <label>
-            <strong>CNPJ/CPF:</strong> {data.cnpj}
-          </label>
-        </>
-      )}
-    </Container>
+        </Endereco>
+        <br />
+        <label>
+          <strong>Telefone:</strong> {data.telefone}
+        </label>
+        <br />
+        <label>
+          <strong>Contato:</strong> {data.contato}
+        </label>
+        <br />
+        <label>
+          <strong>Email:</strong> {data.email}
+        </label>
+        <br />
+        <label>
+          <strong>CNPJ/CPF:</strong> {data.cnpj}
+        </label>
+      </>
+    )}
+  </Container>
   );
 }
 const IconChange = styled.button`
