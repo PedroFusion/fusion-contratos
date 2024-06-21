@@ -31,6 +31,7 @@ export default function ResumeContrato() {
       <>
         <IconChange onClick={() => changeData()}>
           <FaUserEdit />
+          EDITAR
           {/* <h3>ALTERAR DADOS</h3> */}
         </IconChange>
 
@@ -77,8 +78,10 @@ export default function ResumeContrato() {
 const IconChange = styled.button`
   background-color: white;
   display: flex;
+
   :nth-child(1) {
     font-size: 1rem;
+    margin-right: 5px;
   }
 
   position: absolute;
@@ -91,10 +94,10 @@ const IconChange = styled.button`
   justify-content: center;
   align-items: center;
 
-  transition: 0.2s all;
+  transition: 0.3s linear;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.3);
   }
 `;
 const Endereco = styled.div`

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FaUserEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
+import { FaUserEdit,FaEdit } from "react-icons/fa";
+
 import { useNavigate } from "react-router";
 
 export default function ResumeMaquinas() {
@@ -36,13 +36,14 @@ export default function ResumeMaquinas() {
         ) : 
           <>
             <IconChange onClick={() => changeData()}>
-              <FaUserEdit />
+              <FaEdit />
+              EDITAR
             </IconChange>
 
-            <h3>MÁQUINAS - ({data.length} UNIDADES)</h3>
+            <h3>MÁQUINA(S) - {data.length} UNIDADE(S)</h3>
             <br />
             { data.map((item) => <MaquinasContainer>
-            <span>{item.modelo}</span>   <strong>| SERIE: {item.serial} | </strong> <span>CONTADOR: {item.contador}</span>
+            MÁQUINA: <strong>{item.modelo}</strong>   | SERIE: <strong>{item.serial} </strong> | CONTADOR INICIAL: <strong>{item.contador}</strong>
             
             </MaquinasContainer>)}
 
@@ -61,7 +62,8 @@ export default function ResumeMaquinas() {
         ) : 
           <>
             <IconChange onClick={() => changeData()}>
-              <FaUserEdit />
+              <FaEdit />
+               EDITAR
             </IconChange>
 
               <h3>DADOS DO CONTRATO</h3>
@@ -100,7 +102,6 @@ font-size: 1.4rem;
 strong{
   margin-right: 10px;
   margin-left: 10px;
-
   font-weight: 800;
 }
 `
@@ -110,10 +111,10 @@ const MaquinasContainer = styled.div`
   height: 100%;
   padding: 20px;
   justify-content: center;
-  background-color: darkgray;
+  background-color: rgba(0,0,0,0.1);
   align-items: center;
   margin-bottom: 10px;
-  border: 2px black solid;
+  border: 1px rgba(0,0,0,0.2) solid;
 
   font-size: 1.4rem;
   span{
@@ -130,8 +131,10 @@ const MaquinasContainer = styled.div`
 const IconChange = styled.button`
   background-color: white;
   display: flex;
+
   :nth-child(1) {
     font-size: 1rem;
+    margin-right: 4px;
   }
 
   position: absolute;
@@ -144,10 +147,11 @@ const IconChange = styled.button`
   justify-content: center;
   align-items: center;
 
-  transition: 0.2s all;
+  transition: 0.3s linear;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px rgba(0, 255, 0, 0.3);
+    font-weight: 800;
   }
 `;
 const Endereco = styled.div`
@@ -171,6 +175,9 @@ const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(4px);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+
+  text-transform: uppercase !important;
+
 
   h3 {
     font-weight: 900;

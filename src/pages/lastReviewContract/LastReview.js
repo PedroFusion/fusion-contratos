@@ -6,37 +6,33 @@ import ResumeContrato from '../../utils/globalComponents/ResumeContrato';
 import ResumeMaquinas from '../../utils/globalComponents/ResumeMaquinas';
 
 import { ToastContainer, toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 export default function LastReview() {
     const navigate = useNavigate();
+
   return (
-    <Container onLoad={() => {window.scrollTo({ top: 100, left: 100, behavior: "smooth" })}}>
-        <img src={sosLogo} alt="Logo SOS Locacoes" />
-        <h1>ÚLTIMA REVISÃO</h1><br />
-        <span>Confirme se os dados estão corretos</span>   <br />
+    
+        <Container onLoad={() => {window.scrollTo({ top: 0, behavior: "smooth" })}} >
+            <img src={sosLogo} alt="Logo SOS Locacoes" />
+            <h1>ÚLTIMA REVISÃO</h1><br />
+            <span>Confirme se os dados estão corretos</span>   <br />
 
-        <ResumeContrato />
-        <ResumeMaquinas />
-        <ToastContainer />
+            <ResumeContrato />
+            <ResumeMaquinas />
+            <ToastContainer />
 
-        <ContainerButtons>
-            <ButtonObservation onClick={() => window.alert("Aguarde, função em desenvolvimento...")}>🔧<br /> ADICIONAR OBSERVAÇÃO EXTRA</ButtonObservation>
-            <ButtonGoToPDF onClick={() => {
-                 toast.info("Aguarde, estou gerando o pdf, o download será realizado automaticamente... ​✅​", {
-                    position: "bottom-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                  })
-            }}>📖​ <br />GERAR PDF CONTRATO</ButtonGoToPDF>
-        </ContainerButtons><br />
-        <tt>PLATAFORMA DESENVOLVIDA POR: PEDRO HENRIQUE</tt>
-    </Container>
+            <ContainerButtons>
+                <ButtonObservation onClick={() => window.alert("Aguarde, função em desenvolvimento...")}>🔧<br /> ADICIONAR OBSERVAÇÃO EXTRA</ButtonObservation>
+                <ButtonGoToPDF onClick={() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                   navigate("/download")
+                   
+                }}>📖​ <br />GERAR PDF DO CONTRATO</ButtonGoToPDF>
+            </ContainerButtons><br />
+            <tt>PLATAFORMA DESENVOLVIDA POR: PEDRO HENRIQUE</tt>
+        </Container>
   )
 }
 const ButtonGoToPDF = styled.button`

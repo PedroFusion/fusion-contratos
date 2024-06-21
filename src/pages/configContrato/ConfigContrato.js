@@ -13,6 +13,8 @@ export default function ConfigContrato() {
   const navigate = useNavigate();
   const [qtdMaquinas, setQtdMaquinas] = useState(0);
   const [valorContrato, setValorContrato] = useState(0);
+  const [franquia, setFranquia] = useState(0);
+  const [excedente, setExcedente] = useState(0);
   const [dia, setDia] = useState(0);
   const [prazoContrato, setPrazoContrato] = useState(0);
   const [control, setControl] = useState(false);
@@ -65,7 +67,9 @@ export default function ConfigContrato() {
       theme: "light",
     });
 
+    
     setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" })
       navigate("/last-review");
     }, 2000);
 
@@ -74,6 +78,8 @@ export default function ConfigContrato() {
         valorContrato: valorContrato,
         dataVencimento: dia,
         prazoContrato: prazoContrato,
+        franquia: franquia,
+        excedente: excedente,
         qtdMaquinas: maquinasDoContrato.length
 
     }));
@@ -106,6 +112,24 @@ export default function ConfigContrato() {
           placeholder="R$ 1200"
           min={50}
           onChange={(e) => setValorContrato(e.target.value)}
+          required
+        ></input>
+         <label>QUAL A FRANQUIA DE PÁGINAS DO CONTRATO? (TOTAL)</label>
+        <input
+        onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
+          type="number"
+          placeholder="1200"
+          min={10}
+          onChange={(e) => setFranquia(e.target.value)}
+          required
+        ></input>
+         <label>QUAL O VALOR DO EXCEDENTE (POR PÁGINA)?</label>
+        <input
+        onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
+          type="number"
+          placeholder="R$ 0,05"
+          step="0.01"
+          onChange={(e) => setExcedente(e.target.value)}
           required
         ></input>
         <label>QUAL O DIA DO VENCIMENTO? (DIGITE APENAS O DIA)</label>
