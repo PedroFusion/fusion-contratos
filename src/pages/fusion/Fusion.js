@@ -1,14 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import BlockRightClickAndKeys from '../../utils/globalComponents/blockUserClick';
 
 
 export default function Fusion() {
   return (
-    <Container>
-        <h1>CONTRATO Fusion</h1><br />
-      
-        <tt>PLATAFORMA DESENVOLVIDA POR: PEDRO HENRIQUE</tt>
-    </Container>
+    <BlockRightClickAndKeys>
+        <Container>
+            <h1>CONTRATO Fusion</h1><br />
+        
+            <tt>PLATAFORMA DESENVOLVIDA POR: PEDRO HENRIQUE</tt>
+        </Container>
+    </BlockRightClickAndKeys>
   )
 }
 const ContainerButtons = styled.div`

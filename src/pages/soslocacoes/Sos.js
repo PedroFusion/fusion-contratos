@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BlockRightClickAndKeys from "../../utils/globalComponents/blockUserClick";
 
 export default function Sos() {
   const navigate = useNavigate();
@@ -69,87 +70,89 @@ export default function Sos() {
     localStorage.setItem("@dados-contrato", JSON.stringify(DadosdoContrato));
   }
   return (
-    <Container>
-      <img src={sosLogo} alt="Logo SOS Locacoes" />
-      <h3>Configure as regras do contrato</h3>
-      <br />
-      <span>Digite os dados abaixo para gerar o contrato.</span>
-      <br />
-      <br />
-      <ToastContainer />
+    <BlockRightClickAndKeys>
+      <Container>
+        <img src={sosLogo} alt="Logo SOS Locacoes" />
+        <h3>Configure as regras do contrato</h3>
+        <br />
+        <span>Digite os dados abaixo para gerar o contrato.</span>
+        <br />
+        <br />
+        <ToastContainer />
 
-      <form onSubmit={(e) => GravandoDados(e)}>
-        <label>Nome/Razao Social:</label>
-        <input
-          type="text"
-          placeholder="SOS LOCACOES COPIADORAS E IMPRESSORAS LTDA"
-          onChange={(e) => setNome(e.target.value)}
-          required
-        ></input>
-        <label>Endereço:</label>
-        <input
-          type="text"
-          placeholder="Avenida Siqueira Campos, 1590"
-          onChange={(e) => setEndereco(e.target.value)}
-          required
-        ></input>
-        <label>CEP (APENAS NÚMEROS):</label>
-        <input
-          type="number"
-          placeholder="19061000"
-          required
-          onChange={(e) => setCep(e.target.value)}
-        ></input>
-        <label>Cidade + UF:</label>
-        <input
-          type="text"
-          required
-          placeholder="PRESIDENTE PRUDENTE - SP"
-          onChange={(e) => setCidade(e.target.value)}
-        ></input>
-        <label>Telefone:</label>
-        <input
-          type="number"
-          required
-          placeholder="(99) 99999-9999"
-          onChange={(e) => setTelefone(e.target.value)}
-        ></input><label>Nome do Contato:</label>
-        <input
-          type="text"
-          required
-          placeholder="Ex.: ANDRÉ VIDAL"
-          onChange={(e) => setContato(e.target.value)}
-        ></input>
-        <label>CNPJ / CPF:</label>
-        <input
-          type="number"
-          required
-          placeholder="99.999.999/9999-99"
-          onChange={(e) => setCnpj(e.target.value)}
-        ></input>
-        <label>EMAIL:</label>
-        <input
-          type="email"
-          required
-          placeholder="financeiro.copiadoras@outlook.com"
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <br />
-        <br />
-        {controlButton ? (
-          <button className="next-round">PRÓXIMA FASE</button>
-        ) : (
-          <button disabled>PRÓXIMA ETAPA</button>
-        )}
+        <form onSubmit={(e) => GravandoDados(e)}>
+          <label>Nome/Razao Social:</label>
+          <input
+            type="text"
+            placeholder="SOS LOCACOES COPIADORAS E IMPRESSORAS LTDA"
+            onChange={(e) => setNome(e.target.value)}
+            required
+          ></input>
+          <label>Endereço:</label>
+          <input
+            type="text"
+            placeholder="Avenida Siqueira Campos, 1590"
+            onChange={(e) => setEndereco(e.target.value)}
+            required
+          ></input>
+          <label>CEP (APENAS NÚMEROS):</label>
+          <input
+            type="number"
+            placeholder="19061000"
+            required
+            onChange={(e) => setCep(e.target.value)}
+          ></input>
+          <label>Cidade + UF:</label>
+          <input
+            type="text"
+            required
+            placeholder="PRESIDENTE PRUDENTE - SP"
+            onChange={(e) => setCidade(e.target.value)}
+          ></input>
+          <label>Telefone:</label>
+          <input
+            type="number"
+            required
+            placeholder="(99) 99999-9999"
+            onChange={(e) => setTelefone(e.target.value)}
+          ></input><label>Nome do Contato:</label>
+          <input
+            type="text"
+            required
+            placeholder="Ex.: ANDRÉ VIDAL"
+            onChange={(e) => setContato(e.target.value)}
+          ></input>
+          <label>CNPJ / CPF:</label>
+          <input
+            type="number"
+            required
+            placeholder="99.999.999/9999-99"
+            onChange={(e) => setCnpj(e.target.value)}
+          ></input>
+          <label>EMAIL:</label>
+          <input
+            type="email"
+            required
+            placeholder="financeiro.copiadoras@outlook.com"
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <br />
+          <br />
+          {controlButton ? (
+            <button className="next-round">PRÓXIMA FASE</button>
+          ) : (
+            <button disabled>PRÓXIMA ETAPA</button>
+          )}
 
-        <br />
-        <span>Digite os dados para liberar o botão.</span>
-        <br />
-        <br />
-      </form>
+          <br />
+          <span>Digite os dados para liberar o botão.</span>
+          <br />
+          <br />
+        </form>
 
-      <tt>PLATAFORMA DESENVOLVIDA POR: PEDRO HENRIQUE</tt>
-    </Container>
+        <tt>PLATAFORMA DESENVOLVIDA POR: PEDRO HENRIQUE</tt>
+      </Container>
+    </BlockRightClickAndKeys>
   );
 }
 

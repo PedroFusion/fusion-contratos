@@ -11,6 +11,7 @@ import { FaDownload, FaRegHandPointLeft } from "react-icons/fa6";
 import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import BlockRightClickAndKeys from '../../utils/globalComponents/blockUserClick';
 
 export default function Download() {
     const navigate = useNavigate();
@@ -72,6 +73,7 @@ export default function Download() {
       }
   return (
     <>  
+    < BlockRightClickAndKeys>
         <ButtonsNavigation>
 
             <button onClick={() => navigate("/last-review")}><FaRegHandPointLeft /> VOLTAR</button>
@@ -165,6 +167,7 @@ export default function Download() {
 
 
         </BodyStyled>
+        </BlockRightClickAndKeys>
     </>
   )
 }

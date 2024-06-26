@@ -8,6 +8,7 @@ import MaquinaDados from "../../utils/globalComponents/MaquinaDados.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import BlockRightClickAndKeys from "../../utils/globalComponents/blockUserClick.js";
 
 export default function ConfigContrato() {
   const navigate = useNavigate();
@@ -85,89 +86,91 @@ export default function ConfigContrato() {
     }));
   }
   return (
-    <Container>
-      <img src={sosLogo} alt="Logo SOS Locacoes" />
-      <h3>Configure as regras do contrato</h3>
-      <br />
-      <br />
-      <br />
-      <ResumeContrato />
-      <ToastContainer />
-      {!control ?  
-      <form onSubmit={(e) => goToModelAndSerial(e)}>
-        <label>QUAL A QUANTIDADE DE MÁQUINAS?</label>
-        <input
-          type="number"
-          onBlur={() => window.scrollTo({ top: 1000, behavior: "smooth" })}
-          placeholder="EX.: 1"
-          min={1}
-          autoFocus
-          onChange={(e) => setQtdMaquinas(e.target.value)}
-          required
-        ></input>
-        <label>QUAL O VALOR GLOBAL DO CONTRATO?</label>
-        <input
-        onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
-          type="number"
-          placeholder="R$ 1200"
-          min={50}
-          onChange={(e) => setValorContrato(e.target.value)}
-          required
-        ></input>
-         <label>QUAL A FRANQUIA DE PÁGINAS DO CONTRATO? (TOTAL)</label>
-        <input
-        onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
-          type="number"
-          placeholder="1200"
-          min={10}
-          onChange={(e) => setFranquia(e.target.value)}
-          required
-        ></input>
-         <label>QUAL O VALOR DO EXCEDENTE (POR PÁGINA)?</label>
-        <input
-        onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
-          type="number"
-          placeholder="R$ 0,05"
-          step="0.01"
-          onChange={(e) => setExcedente(e.target.value)}
-          required
-        ></input>
-        <label>QUAL O DIA DO VENCIMENTO? (DIGITE APENAS O DIA)</label>
-        <input
-          type="number"
-          onBlur={() => window.scrollTo({ top: 2000, behavior: "smooth" })}
-          placeholder="10"
-          max={31}
-          onChange={(e) => setDia(e.target.value)}
-          required
-        ></input>
-        <label>QUAL O PRAZO DO CONTRATO? (EM MESES)</label>
-        <input
-          onBlur={() => window.scrollTo({ top: 2500, behavior: "smooth" })}
-          type="number"
-          min={6}
-          placeholder="EX.: 12"
-          onChange={(e) => setPrazoContrato(e.target.value)}
-          required
-        ></input>
-        <button>PRÓXIMA</button>
-      </form> 
-      : 
-      
+    <BlockRightClickAndKeys>
+      <Container>
+        <img src={sosLogo} alt="Logo SOS Locacoes" />
+        <h3>Configure as regras do contrato</h3>
+        <br />
+        <br />
+        <br />
+        <ResumeContrato />
+        <ToastContainer />
+        {!control ?  
+        <form onSubmit={(e) => goToModelAndSerial(e)}>
+          <label>QUAL A QUANTIDADE DE MÁQUINAS?</label>
+          <input
+            type="number"
+            onBlur={() => window.scrollTo({ top: 1000, behavior: "smooth" })}
+            placeholder="EX.: 1"
+            min={1}
+            autoFocus
+            onChange={(e) => setQtdMaquinas(e.target.value)}
+            required
+          ></input>
+          <label>QUAL O VALOR GLOBAL DO CONTRATO?</label>
+          <input
+          onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
+            type="number"
+            placeholder="R$ 1200"
+            min={50}
+            onChange={(e) => setValorContrato(e.target.value)}
+            required
+          ></input>
+          <label>QUAL A FRANQUIA DE PÁGINAS DO CONTRATO? (TOTAL)</label>
+          <input
+          onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
+            type="number"
+            placeholder="1200"
+            min={10}
+            onChange={(e) => setFranquia(e.target.value)}
+            required
+          ></input>
+          <label>QUAL O VALOR DO EXCEDENTE (POR PÁGINA)?</label>
+          <input
+          onBlur={() => window.scrollTo({ top: 1500, behavior: "smooth" })}
+            type="number"
+            placeholder="R$ 0,05"
+            step="0.01"
+            onChange={(e) => setExcedente(e.target.value)}
+            required
+          ></input>
+          <label>QUAL O DIA DO VENCIMENTO? (DIGITE APENAS O DIA)</label>
+          <input
+            type="number"
+            onBlur={() => window.scrollTo({ top: 2000, behavior: "smooth" })}
+            placeholder="10"
+            max={31}
+            onChange={(e) => setDia(e.target.value)}
+            required
+          ></input>
+          <label>QUAL O PRAZO DO CONTRATO? (EM MESES)</label>
+          <input
+            onBlur={() => window.scrollTo({ top: 2500, behavior: "smooth" })}
+            type="number"
+            min={6}
+            placeholder="EX.: 12"
+            onChange={(e) => setPrazoContrato(e.target.value)}
+            required
+          ></input>
+          <button>PRÓXIMA</button>
+        </form> 
+        : 
         
-      listaMaquinas.length > 0 ? 
-      <>
-        <ListMaquinasDiv onLoad={() => {window.scrollTo({ top: 2500, behavior: "smooth" })}}>
-            {listaMaquinas.map((item, index ) => <MaquinaDados key={index} maqNumber={index} setMaquinasDosContrato={setMaquinasDosContrato} maquinasDoContrato={maquinasDoContrato}/>) }
-        </ListMaquinasDiv>
-        {mostraBotaoDepoisDeObterNumeroDeSerie ? <BtnGo onClick={() => salvarSerialeContradorLocalStorage()}>PROXIMO</BtnGo> : <></>}
-      </>
-          :
-          <span>Ops! parece que aconteceu algum problema técnico, acionar o T.I. (Pedro Henrique)</span>
-        
-      }
+          
+        listaMaquinas.length > 0 ? 
+        <>
+          <ListMaquinasDiv onLoad={() => {window.scrollTo({ top: 2500, behavior: "smooth" })}}>
+              {listaMaquinas.map((item, index ) => <MaquinaDados key={index} maqNumber={index} setMaquinasDosContrato={setMaquinasDosContrato} maquinasDoContrato={maquinasDoContrato}/>) }
+          </ListMaquinasDiv>
+          {mostraBotaoDepoisDeObterNumeroDeSerie ? <BtnGo onClick={() => salvarSerialeContradorLocalStorage()}>PROXIMO</BtnGo> : <></>}
+        </>
+            :
+            <span>Ops! parece que aconteceu algum problema técnico, acionar o T.I. (Pedro Henrique)</span>
+          
+        }
 
-    </Container>
+      </Container>
+    </BlockRightClickAndKeys>
   );
 }
 const BtnGo = styled.button`
